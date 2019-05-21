@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/csv"
-	"filter"
+	"goahrs"
 	"flag"
 	"log"
 	"os"
@@ -10,7 +10,7 @@ import (
 )
 
 var newTab [][]string
-var q filter.Quaternion
+var q goahrs.Quaternion
 
 var (
 	accelxoffset = -0.67185
