@@ -1,5 +1,5 @@
 # GoproAHRS
-Convert imu metadata from Gopro Hero 5 to AHRS using the CSV file from DashWare
+Convert IMU metadata from Gopro Hero 5 to AHRS using the CSV file from DashWare
 
 ## How to Use
 - You must have Golang installed<br/>
