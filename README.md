@@ -20,5 +20,5 @@ then, open the folder goproahrs:<br/>
 paste the file copied above<br/>
 and execute the following command:<br/>
 `$ go run main.go -i GOPR2630.csv`<br/>
+finally a new file called _GOPR2631-ahrs.csv_ will be created<br/>
 _(replace GOPR2630.csv with the name of your file)_<br/>
-finally a new file will be created<br/>
