@@ -12,13 +12,27 @@ the software will automatically generate a CSV file inside the project folder.<b
 Copy this file.<br/>
 _(Contains all the metadata of the video)_<br/>
 
+## First method
 Inside any folder execute the command:<br/>
 `$ git clone https://github.com/brunocannavina/goproahrs.git`<br/>
 _(or you can simply download it from github)_<br/>
 then, open the folder goproahrs:<br/>
 `$ cd goproahrs`<br/>
-paste the file copied above<br/>
+paste the CSV file copied above<br/>
 and execute the following command:<br/>
 `$ go run main.go -i GOPR2630.csv`<br/>
-finally a new file called _GOPR2631-ahrs.csv_ will be created<br/>
+finally a new file called _GOPR2630-ahrs.csv_ will be created<br/>
+_(replace GOPR2630.csv with the name of your file)_<br/>
+
+## Second method 
+**_(this method does not require golang)_**
+Inside any folder execute the command:<br/>
+`$ git clone https://github.com/brunocannavina/goproahrs.git`<br/>
+_(or you can simply download it from github)_<br/>
+then, open the folder goproahrs:<br/>
+`$ cd goproahrs`<br/>
+paste the CSV file copied above<br/>
+and execute the following command:<br/>
+`$ ahrs.exe -i GOPR2630.csv`<br/>
+finally a new file called _GOPR2630-ahrs.csv_ will be created<br/>
 _(replace GOPR2630.csv with the name of your file)_<br/>
