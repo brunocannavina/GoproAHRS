@@ -9,7 +9,7 @@ Convert IMU metadata from Gopro Hero 5 to AHRS using the CSV file from DashWare
 
 When you import the video into DashWare,<br/>
 the software will automatically generate a CSV file inside the project folder.<br/>
-Copy this file.<br/>
+Copy that .csv file.<br/>
 _(Contains all the metadata of the video)_<br/>
 
 ## First method
@@ -25,7 +25,7 @@ finally a new file called _GOPR2630-ahrs.csv_ will be created<br/>
 _(replace GOPR2630.csv with the name of your file)_<br/>
 
 ## Second method 
-**_(this method does not require golang)_**
+**_(this method does not require golang)_**<br/>
 Inside any folder execute the command:<br/>
 `$ git clone https://github.com/brunocannavina/goproahrs.git`<br/>
 _(or you can simply download it from github)_<br/>
