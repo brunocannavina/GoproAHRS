@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/csv"
-	"goahrs"
 	"flag"
+	"goahrs"
 	"log"
 	"os"
 	"strconv"
@@ -22,7 +22,7 @@ var (
 )
 
 func main() {
-	inName := flag.String("i", "", "Required: telemetry file from DashWare to read")
+	inName := flag.String("i", "", "Required: tele metry file from DashWare to read")
 	flag.Parse()
 	if *inName == "" {
 		flag.Usage()
@@ -51,19 +51,15 @@ func appendData(rows [][]string) {
 
 	for i := range rows {
 		if i == 0 {
-			header := []string{"TIME", "PITCH", "ROLL", "YAW", "WORLDX", "WORLDY", "WORLDZ"}
+			header := []string{"TIME", "PITCH", "ROLL", "YAW"}
 			newTab = append(newTab, header)
 		} else {
 			q.UpdateIMU(strToFloat(rows[i][18])-gyroxoffset, strToFloat(rows[i][19])-gyroyoffset, strToFloat(rows[i][17])-gyrozoffset, strToFloat(rows[i][14])-accelxoffset, strToFloat(rows[i][15])-accelyoffset, strToFloat(rows[i][13])-accelzoffset)
-			w := q.GetWorldAccel()
 			line := []string{
 				rows[i][0],
 				floatToStr(q.GetPitch()),
 				floatToStr(q.GetRoll()),
 				floatToStr(q.GetYaw()),
-				floatToStr(w[0]),
-				floatToStr(w[1]),
-				floatToStr(w[2]),
 			}
 			newTab = append(newTab, line)
 		}
