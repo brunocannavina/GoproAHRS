@@ -9,7 +9,6 @@ import (
 	"strconv"
 )
 
-var newTab [][]string
 var q goahrs.Quaternion
 
 var (
@@ -28,10 +27,14 @@ func main() {
 		flag.Usage()
 		return
 	}
+	outName := *inName
+	outName = outName[:len(outName)-4] + "-ahrs.csv"
+	
+	// 20 is sensors sample frequency
 	q.Begin(20)
-	rows := readSample(*inName)
-	appendData(rows)
-	writeChanges(*inName, newTab)
+	sensors := readSample(*inName)
+	table := appendData(sensors)
+	writeChanges(outName, table)
 }
 
 func readSample(name string) [][]string {
@@ -47,14 +50,22 @@ func readSample(name string) [][]string {
 	return rows
 }
 
-func appendData(rows [][]string) {
-
+func appendData(rows [][]string) [][]string {
+	var newTab [][]string
 	for i := range rows {
 		if i == 0 {
 			header := []string{"TIME", "PITCH", "ROLL", "YAW"}
 			newTab = append(newTab, header)
 		} else {
-			q.UpdateIMU(strToFloat(rows[i][18])-gyroxoffset, strToFloat(rows[i][19])-gyroyoffset, strToFloat(rows[i][17])-gyrozoffset, strToFloat(rows[i][14])-accelxoffset, strToFloat(rows[i][15])-accelyoffset, strToFloat(rows[i][13])-accelzoffset)
+			gx := strToFloat(rows[i][18])-gyroxoffset
+			gy := strToFloat(rows[i][19])-gyroyoffset
+			gz := strToFloat(rows[i][17])-gyrozoffset
+			ax := strToFloat(rows[i][14])-accelxoffset
+			ay := strToFloat(rows[i][15])-accelyoffset
+			az := strToFloat(rows[i][13])-accelzoffset
+
+			q.UpdateIMU(gx, gy, gz, ax, ay, az)
+
 			line := []string{
 				rows[i][0],
 				floatToStr(q.GetPitch()),
@@ -64,10 +75,11 @@ func appendData(rows [][]string) {
 			newTab = append(newTab, line)
 		}
 	}
+	return newTab
 }
 
 func writeChanges(name string, data [][]string) {
-	f, err := os.Create(name[:len(name)-4] + "-ahrs.csv")
+	f, err := os.Create(name)
 	if err != nil {
 		log.Fatal(err)
 	}
