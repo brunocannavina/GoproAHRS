@@ -1,9 +1,14 @@
 @echo off
 
-set scriptdir=%~dp0
-set file=%1
-set nombre=%~n1
+echo Processing...
 
+set scriptdir=%~dp0
+set nombre=%~n1
+set nomext=%~nx1
 
 IF [%1]==[] GOTO :eof
-dir %file% /a:a/b/s > "%scriptdir%%nombre%.txt"
+IF EXIST "%scriptdir%\%~n1-ahrs.csv" GOTO :eof
+
+echo Wait please...
+
+START "" /WAIT /MIN "%scriptdir%\bin\ahrs" -i "%nomext%"
